@@ -61,8 +61,15 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="xzh-vh-VF1">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="IE2-FE-wqZ"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="IE2-FE-wqZ">
+                            <connections>
+                                <action selector="addButtonTapped:" destination="lJd-jc-MRC" id="Rhu-42-ChL"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="nameTextField" destination="MoG-ie-22B" id="fOc-VR-T94"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TvR-K0-6kX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

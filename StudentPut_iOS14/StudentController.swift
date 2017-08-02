@@ -43,8 +43,37 @@ class StudentController {
         dataTask.resume()
     }
     
-    static func postStudents() {
+    static func putStudentWith(name: String, completion: @escaping (_ success: Bool) -> Void) {
+        guard let baseURL = self.baseURL else { completion(false); return }
         
+        let url = baseURL.appendingPathComponent(UUID().uuidString).appendingPathExtension("json")
+        
+        // create the student before we pass it through the httpBody
+        
+        let student = Student(name: name)
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT"
+        request.httpBody = student.jsonData
+        
+        let dataTask = URLSession.shared.dataTask(with: request) { (data, _, error) in
+            guard let data = data,
+                let responseDataString = String(data: data, encoding: .utf8) else { NSLog("Unable to verify data."); completion(false); return }
+            
+            if let error = error {
+                NSLog("Error Found. Error: \(error.localizedDescription)")
+                completion(false)
+                return
+            } else {
+                print(responseDataString)
+                self.students.append(student)
+                completion(true)
+            }
+            
+            // we dont need to serialize the json Data here because we did that in the Student Model
+            
+        }
+        dataTask.resume()
     }
     
 }
